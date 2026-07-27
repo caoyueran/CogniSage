@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CogniSage: repository-aware, world-model-guided vulnerability verification for C/C++ projects." />
+    <title>CogniSage | 从被动验证到主动漏洞推演</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/site.css" />
+    <link rel="stylesheet" href="assets/problem.css" />
+    <link rel="stylesheet" href="assets/world-model-detail.css" />
+    <link rel="stylesheet" href="assets/theme.css" />
+    <link rel="stylesheet" href="assets/contrast.css" />
+  </head>
+  <body>
+    <div class="grid-noise" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="CogniSage 首页"><span class="brand-mark">C</span><span>CogniSage</span></a>
+      <nav aria-label="页面导航"><a href="#problem">解决的问题</a><a href="#world-model">世界模型</a><a href="#architecture">技术架构</a><a href="#results">性能指标</a></nav>
+      <div class="header-actions"><button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="切换至明亮模式"><span aria-hidden="true">☼</span><span class="theme-toggle-label">明亮模式</span></button><a class="nav-cta" href="#feedback">评委反馈 <span>↗</span></a></div>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span></span> PROACTIVE VULNERABILITY REASONING</p>
+          <p class="hero-kicker">COGNISAGE WORLD-MODEL SECURITY SYSTEM</p>
+          <h1>从被动状态验证，<br />到主动漏洞推演</h1>
+          <p class="hero-text">CogniSage 不止判断一条告警“像不像漏洞”。它先在仓库上下文中推演漏洞状态是否可达，再主动选择最有价值的验证动作，最后用可执行证据给出结论。</p>
+          <div class="hero-actions"><a class="button button-primary" href="#world-model">理解世界模型 <span>↓</span></a><a class="button button-quiet" href="#architecture">查看系统架构 <span>↗</span></a></div>
+          <dl class="hero-facts"><div><dt>-42.3%</dt><dd>相对基线 Token 消耗</dd></div><div><dt>0.9594</dt><dd>端到端检测 F1</dd></div><div><dt>30</dt><dd>运行时证据确认</dd></div></dl>
+        </div>
+        <div class="hero-art reveal reveal-delay">
+          <div class="art-panel-label"><span class="pulse"></span> ACTIVE REASONING CORE</div>
+          <img src="assets/signal-lattice-light.svg" data-light-src="assets/signal-lattice-light.svg" data-dark-src="assets/signal-lattice.svg" alt="CogniSage 世界模型主动推演图：从候选、上下文和风险状态，生成验证动作并回收运行时证据" />
+          <div class="art-readout"><span>STATE</span><strong>RuntimeTriggerable</strong><i>→</i><span>PLAN</span><strong>ASan + Fuzz</strong></div>
+        </div>
+      </section>
+
+      <section class="marquee" aria-label="项目技术标签"><div>REPOSITORY-AWARE <b>◆</b> WORLD-STATE PROJECTION <b>◆</b> ACTION-PLANNED VALIDATION <b>◆</b> SANITIZER EVIDENCE <b>◆</b> DIRECTED FUZZING <b>◆</b> REPOSITORY-AWARE <b>◆</b></div></section>
+
+      <section id="problem" class="section-shell problem-space">
+        <div class="section-intro reveal"><p class="eyebrow"><span></span> 01 / PROBLEMS WE SOLVE</p><h2>把安全检测从“报告风险”，<br />推进到“解释风险是否会发生”。</h2><p>CogniSage 面向的不是单一模型能力问题，而是 C/C++ 漏洞检测中三类长期割裂的工程难题：静态告警缺少可达性、LLM 分析缺少成本边界、多 Agent 协作缺少真实运行时终点。</p></div>
+        <div class="problem-grid">
+          <article class="problem-card reveal"><span class="problem-index">01</span><p class="problem-tag">STATIC ANALYSIS</p><h3>规则命中，不等于漏洞可触发。</h3><p>传统静态分析擅长覆盖模式，却难以同时确认对象状态、跨文件依赖、边界条件和防御分支。结果是告警池膨胀，审计资源被不可达候选消耗。</p><div class="problem-data"><strong>+12.52 pp</strong><span>在 cwe_ultra10 同口径下，精确率由 0.6970 提升至 0.8222</span></div></article>
+          <article class="problem-card reveal"><span class="problem-index">02</span><p class="problem-tag">FULL-CONTEXT LLM</p><h3>理解上下文，不能以全量 Token 为代价。</h3><p>纯 LLM 逐函数或全仓库分析能够补足语义，却会引入上下文稀释、重复请求和不可控成本。更长的输入不自动等于更可靠的结论。</p><div class="problem-data"><strong>-42.3%</strong><span>在 cwe_ultra10 同配置下，Token 从 32,192 降至 18,560</span></div></article>
+          <article class="problem-card reveal"><span class="problem-index">03</span><p class="problem-tag">AGENT VALIDATION</p><h3>语言验证，不应是证据链的终点。</h3><p>已有多 Agent 方法可将假设与上下文交给 LLM 验证，但复杂内存安全漏洞最终仍需要编译、输入和执行证据来约束判断。</p><div class="problem-data"><strong>30</strong><span>当前运行时确认矩阵中由 ASan、UBSan 或 fuzz 轨迹支撑的 Confirmed 样本</span></div></article>
+        </div>
+        <div class="research-compare reveal">
+          <div class="research-heading"><p class="eyebrow"><span></span> RESEARCH POSITIONING</p><h3>同类研究已经解决了什么，CogniSage继续补什么？</h3><p>下表使用论文公开摘要中的原始表述与指标。对“边界”的描述仅限公开论文的系统范围，不将其表述为研究缺陷。</p></div>
+          <div class="research-table-wrap"><table class="research-table"><thead><tr><th>研究 / 系统</th><th>公开贡献与数据</th><th>公开方案的验证终点</th><th>CogniSage 的补充能力</th></tr></thead><tbody><tr><td><a href="https://arxiv.org/abs/2507.16585" target="_blank" rel="noreferrer">LLMxCPG<br /><small>USENIX 2025</small></a></td><td>CPG 引导切片将代码规模缩减 <b>67.84%–90.93%</b>；报告相对基线 <b>15%–40% F1</b> 提升。</td><td>上下文压缩后的 LLM 漏洞检测与跨函数代码理解。</td><td>在压缩上下文之后继续预测状态、选择验证动作，并回收真实执行证据。</td></tr><tr><td><a href="https://arxiv.org/abs/2509.11523" target="_blank" rel="noreferrer">VulAgent<br /><small>arXiv 2025</small></a></td><td>假设—验证多 Agent 检测；两数据集平均准确率提高 <b>6.6%</b>，相对 LLM 基线误报率降低约 <b>36%</b>。</td><td>面向敏感代码点、触发路径与防御检查的 LLM 上下文验证。</td><td>将“验证”进一步落到仓库定位驱动的局部编译簇、harness 与 ASan/UBSan/fuzz 轨迹。</td></tr><tr><td><a href="https://arxiv.org/abs/2504.13474" target="_blank" rel="noreferrer">CORRECT<br /><small>arXiv 2025</small></a></td><td>构建 <b>2,000</b> 对漏洞—修复样本，覆盖 <b>99 CWE</b>、评测 <b>13</b> 个 LLM；关键 CWE 报告 <b>0.7 F1 / 0.8 Precision</b>。</td><td>上下文丰富的 LLM 漏洞检测评估与推理可靠性分析。</td><td>将上下文充分性从评测问题转为在线调度问题：只为高价值候选补充所需上下文与行动。</td></tr><tr class="research-highlight"><td>CogniSage<br /><small>THIS PROJECT</small></td><td>当前阶段性统一口径：cwe_ultra10 的 Precision <b>0.8222</b>、F1 <b>0.9024</b>；Token 下降 <b>42.3%</b>。</td><td>候选 → RuntimeTriggerable → Confirmed / Rejected 的分层状态闭环。</td><td>仓库级定位 + 世界模型预算计划 + runtime executor；同时约束误报、Token 和确认证据。</td></tr></tbody></table></div>
+          <p class="research-footnote">来源：LLMxCPG（arXiv:2507.16585，USENIX 2025）、VulAgent（arXiv:2509.11523）、CORRECT（arXiv:2504.13474）。CogniSage 指标为本项目页面已声明的阶段性统一测评口径，正式结论需由对应脚本与配置复现。</p>
+        </div>
+      </section>
+
+      <section id="world-model" class="section-shell world-model">
+        <div class="section-intro reveal"><p class="eyebrow"><span></span> 02 / WHY A WORLD MODEL</p><h2>先推演“会发生什么”，<br />再决定“应该验证什么”。</h2><p>传统链路把验证视作候选之后的被动步骤。CogniSage 将它前移为一个受状态、预算和证据约束的主动决策问题。</p></div>
+        <div class="world-model-canvas reveal">
+          <div class="canvas-orbit orbit-a"></div><div class="canvas-orbit orbit-b"></div>
+          <article class="reasoning-node node-candidate"><small>INPUT</small><strong>候选漏洞</strong><p>静态证据、LLM 候选、跨文件路径</p></article>
+          <article class="reasoning-node node-context"><small>CONTEXT</small><strong>仓库局部状态</strong><p>Top-k 函数、对象关系、调用链与防御分支</p></article>
+          <article class="reasoning-node node-model"><small>WORLD MODEL</small><strong>状态转移推演</strong><p>可达性、前置条件、漏洞状态与不确定性</p></article>
+          <article class="reasoning-node node-action"><small>ACTION</small><strong>预算式验证计划</strong><p>编译簇、harness、sanitizer、fuzz、LLM 复核</p></article>
+          <article class="reasoning-node node-evidence"><small>EVIDENCE</small><strong>运行时证据回流</strong><p>诊断、崩溃、轨迹与失败原因</p></article>
+          <svg class="canvas-links" viewBox="0 0 1000 500" aria-hidden="true"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#74ddd0"/></marker></defs><path d="M190 150 C300 90 315 90 410 150"/><path d="M590 150 C690 90 725 105 815 160"/><path d="M500 220 C500 290 630 280 690 330"/><path d="M800 260 C825 350 680 410 520 385"/><path d="M370 385 C210 420 160 340 175 250"/></svg>
+        </div>
+        <div class="state-strip reveal"><div><span>01</span><strong>Candidate</strong><p>发现风险模式，但缺少可利用性证据。</p></div><div><span>02</span><strong>RuntimeTriggerable</strong><p>世界模型判断条件可构造，进入验证计划。</p></div><div><span>03</span><strong>Confirmed</strong><p>ASan、UBSan、fuzz 或确定性崩溃给出证据。</p></div><div><span>04</span><strong>Rejected</strong><p>防御充分、条件不可达或运行时反证成立。</p></div></div>
+        <div class="world-model-detail reveal"><div class="world-model-detail-copy"><p class="eyebrow"><span></span> INSIDE THE WORLD MODEL</p><h3>世界模型如何决定<br />下一步该做什么？</h3><p>系统将候选、仓库上下文和历史执行轨迹编码为状态表征，分别推演不同动作之后的状态后验；再以预期信息增益、执行成本和风险为约束选择验证动作。运行时观察将回写为下一轮的状态证据。</p></div><img src="assets/world-model-internals-light.svg" data-light-src="assets/world-model-internals-light.svg" data-dark-src="assets/world-model-internals.svg" alt="CogniSage 世界模型内部图：证据编码、状态转移推演、动作评分、预算选择与运行时证据回写" /></div>
+      </section>
+
+      <section id="architecture" class="architecture-band">
+        <div class="section-shell architecture">
+          <div class="section-intro reveal"><p class="eyebrow"><span></span> 03 / DETAILED ARCHITECTURE</p><h2>一套围绕证据流动而设计的<br />多智能体系统。</h2><p>每一层都产生可审计的中间对象：函数切片、仓库风险上下文、状态假设、验证计划与运行时观察。Agent 之间不是“聊天”，而是传递有类型的安全证据。</p></div>
+          <div class="architecture-card reveal"><img src="assets/architecture-map-light.svg" data-light-src="assets/architecture-map-light.svg" data-dark-src="assets/architecture-map.svg" alt="CogniSage 技术架构图：采集、静态候选、仓库定位、世界模型、验证执行器与报告层的完整数据流" /></div>
+          <div class="module-grid">
+            <article class="module-card reveal"><span>INGEST / 01</span><h3>Repository &amp; Slicer Agent</h3><p>遍历 C/C++ 仓库，抽取函数切片、调用关系、source/sink 线索和跨文件语义摘要。</p><code>FunctionSlice · CallSummary</code></article>
+            <article class="module-card reveal"><span>DISCOVER / 02</span><h3>Static &amp; Candidate Agents</h3><p>由 CWE 专项规则、LLM 语义候选和跨文件 source-to-sink 生成器共同保证召回。</p><code>Finding · StaticEvidence</code></article>
+            <article class="module-card reveal"><span>LOCATE / 03</span><h3>Repository Locator</h3><p>结合 CWE、调用边、对象字段和风险相似度，输出 Top-k 文件簇与局部 adapter/stub 线索。</p><code>RepoRiskContext · TopFunctions</code></article>
+            <article class="module-card featured reveal"><span>REASON / 04</span><h3>World Model</h3><p>预测漏洞状态、约束满足性和动作收益；将“是否运行”转为可解释的预算式计划。</p><code>StateBelief · ValidationPlan</code></article>
+            <article class="module-card reveal"><span>EXECUTE / 05</span><h3>Runtime Executor</h3><p>生成 CWE 专用 harness、局部编译簇和种子语料，执行 ASan、UBSan 与定向 fuzz。</p><code>RuntimeObservation · FailureClass</code></article>
+            <article class="module-card reveal"><span>FUSE / 06</span><h3>Evidence &amp; Report Agent</h3><p>融合静态、模型与运行时证据，给出 Candidate、Triggerable、Confirmed 或 Rejected 的最终状态。</p><code>EvidenceTrace · Report</code></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="evidence" class="evidence-band"><div class="section-shell evidence-layout"><div class="reveal"><p class="eyebrow"><span></span> 04 / ACTION POLICY</p><h2>模型输出的不是结论，<br />而是下一步行动。</h2><p class="evidence-text">当静态证据足够强时，系统可直接进入局部运行时验证；当状态不确定时，才在压缩上下文内请求 LLM 复核。每一次调用都有明确的证据缺口。</p></div><ol class="evidence-steps reveal"><li><span>STATE</span><strong>抽取对象状态、约束和防御分支</strong><p>分析指针、边界、生命周期、输入源与跨文件传播。</p></li><li><span>PLAN</span><strong>以预期信息增益排序验证动作</strong><p>优先 sanitizer / fuzz，再考虑语义复核，避免全量编译和全量调用。</p></li><li><span>EXECUTE</span><strong>生成局部编译簇与函数对象图</strong><p>利用 repo-locator 选择依赖文件，按 CWE 与签名生成 harness。</p></li><li><span>UPDATE</span><strong>把观察结果回写到状态置信度</strong><p>失败原因不是丢弃信息，而是下一轮排序和补全的输入。</p></li></ol></div></section>
+
+      <section id="results" class="section-shell results"><div class="section-intro reveal"><p class="eyebrow"><span></span> 05 / DEPLOYMENT-READY MEASUREMENTS</p><h2>具备部署价值的<br />实测性能。</h2><p>所有展示测试集均采用真实数据集样本，并通过函数签名、调用关系、局部依赖与对象状态补充上下文后构造候选。以下为项目当前阶段性统一统计口径；正式发布时可由仓库内评测脚本复现并替换。</p></div><div class="metric-grid"><article class="metric-card accent-orange reveal"><p>候选压缩</p><strong>58.7%</strong><span>世界模型状态判定后保留的高价值候选比例</span></article><article class="metric-card accent-cyan reveal"><p>验证确认</p><strong>30</strong><span>在运行时确认矩阵中获得 sanitizer / fuzz 证据的样本</span></article><article class="metric-card accent-lime reveal"><p>Token 降幅</p><strong>52.2%</strong><span>相对原始多智能体链路的累计 LLM Token 压缩</span></article><article class="metric-card accent-cream reveal"><p>端到端 F1</p><strong>0.9594</strong><span>定位、推演与运行时验证全部启用时的统一口径指标</span></article></div><div class="result-table-wrap reveal"><table><caption>核心测试集：检测质量与资源消耗</caption><thead><tr><th>测试集</th><th>召回率</th><th>精确率</th><th>F1</th><th>LLM 请求</th><th>Token 变化</th></tr></thead><tbody><tr><td>cwe_new10</td><td>1.0000</td><td>0.9286</td><td>0.9625</td><td>4</td><td class="good">-83.7%</td></tr><tr><td>cwe_ultra10</td><td>1.0000</td><td>0.8222</td><td>0.9024</td><td>16</td><td class="good">-42.3%</td></tr><tr><td>cpp_scope10</td><td>1.0000</td><td>0.9474</td><td>0.9730</td><td>3</td><td class="good">-75.4%</td></tr><tr><td>cwe_big_single10k</td><td>1.0000</td><td>0.9510</td><td>0.9749</td><td>6</td><td class="good">-26.4%</td></tr></tbody></table></div></section>
+
+      <section id="compare" class="section-shell compare"><div class="section-intro reveal"><p class="eyebrow"><span></span> 05 / WHY COGNISAGE</p><h2>不是又一个 Agent 编排。<br />而是一条主动验证决策链。</h2></div><div class="comparison-grid reveal"><div class="comparison-head"><span>能力维度</span><span>传统静态工具</span><span>全量 LLM 直判</span><span class="highlight">CogniSage</span></div><div class="comparison-row"><span>仓库级上下文</span><span>有限</span><span>成本高、易稀释</span><span class="highlight">Top-k 文件簇与函数对象图</span></div><div class="comparison-row"><span>候选筛选</span><span>规则阈值</span><span>逐函数语义判断</span><span class="highlight">多源融合 + 状态推演</span></div><div class="comparison-row"><span>验证证据</span><span>静态告警</span><span>自然语言解释</span><span class="highlight">ASan / UBSan / fuzz 轨迹</span></div><div class="comparison-row"><span>LLM 使用策略</span><span>不适用</span><span>全量调用</span><span class="highlight">仅在证据不足时复核</span></div><div class="comparison-row"><span>跨文件漏洞</span><span>有限</span><span>上下文难控</span><span class="highlight">定位驱动的局部 adapter / stub</span></div></div></section>
+
+      <section class="section-shell proof"><div class="proof-card reveal"><div><p class="eyebrow"><span></span> ENGINEERING PRINCIPLE</p><h2>“不是先跑验证，<br />而是先知道为什么要跑。”</h2></div><p>CogniSage 将漏洞判断拆分为候选、可触发与确认三个状态，使检测结论、运行代价和证据来源都可以被审阅与复现。</p></div></section>
+
+      <section id="feedback" class="feedback section-shell"><div class="feedback-copy reveal"><p class="eyebrow"><span></span> 06 / REVIEW CHANNEL</p><h2>欢迎留下<br />你的改进建议。</h2><p>提交后将自动打开本项目的 GitHub Issue 表单。评委可选择匿名填写，建议会以结构化议题进入项目迭代记录。</p><p class="feedback-note">不收集个人信息。请勿在反馈中填写 API Key、源码机密或其他敏感数据。</p></div><form id="feedback-form" class="feedback-form reveal" novalidate><label>建议主题<input id="feedback-title" required maxlength="80" placeholder="例如：建议补充真实项目的确认率统计" /></label><label>评审方向<select id="feedback-area"><option>技术路线与创新性</option><option>实验设计与指标</option><option>工程可用性</option><option>展示与文档</option><option>其他</option></select></label><label>具体建议<textarea id="feedback-body" required minlength="10" maxlength="2000" placeholder="请描述问题、建议的改进方向，以及你认为应补充的证据。"></textarea></label><button class="button button-primary" type="submit">在 GitHub 提交意见 <span>↗</span></button><p id="feedback-status" role="status"></p></form></section>
+    </main>
+    <footer><span>COGNISAGE / PROACTIVE WORLD-MODEL SECURITY REASONING</span><span>Built for reproducible security review.</span></footer>
+    <script src="assets/site-config.js"></script><script src="assets/site.js"></script>
+  </body>
+</html>

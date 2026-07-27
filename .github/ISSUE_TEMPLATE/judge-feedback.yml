@@ -1,0 +1,25 @@
+name: Judge feedback
+description: Submit an improvement suggestion for VulnSage.
+title: "[Judge feedback] "
+labels: ["judge-feedback"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Review area
+      options:
+        - Technical approach and novelty
+        - Experimental design and metrics
+        - Engineering usability
+        - Presentation and documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Improvement suggestion
+      description: Please avoid secrets, API keys, or confidential code.
+      placeholder: Describe the issue and the suggested improvement.
+    validations:
+      required: true

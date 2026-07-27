@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 620" role="img" aria-labelledby="title desc">
+  <title id="title">CogniSage 世界模型内部推演与动作规划</title>
+  <desc id="desc">候选、仓库上下文和历史观察被编码为状态信念；状态转移预测器生成未来状态，动作规划器按信息增益和预算选择验证动作，运行时证据再回写更新状态。</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b1917"/><stop offset="1" stop-color="#132d27"/></linearGradient>
+    <linearGradient id="core" x1="0" x2="1"><stop stop-color="#d8ef72"/><stop offset="1" stop-color="#73ddcf"/></linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#73ddcf"/></marker>
+  </defs>
+  <rect x="1" y="1" width="1178" height="618" rx="28" fill="url(#background)" stroke="#3b5c55" stroke-width="2"/>
+  <g opacity=".12" stroke="#9bd8ca"><path d="M0 110h1180M0 230h1180M0 350h1180M0 470h1180"/><path d="M140 0v620M340 0v620M540 0v620M740 0v620M940 0v620"/></g>
+  <g font-family="Microsoft YaHei, Noto Sans SC, sans-serif"><text x="42" y="50" fill="#d8ef72" font-size="16" font-weight="700">世界模型内部：状态推演、动作评分与证据回写</text><text x="42" y="76" fill="#a8c5bb" font-size="13">不是直接输出“有漏洞/无漏洞”，而是维护状态信念并选择在有限预算下最值得执行的下一步。</text></g>
+  <g font-family="Microsoft YaHei, Noto Sans SC, sans-serif">
+    <g><rect x="42" y="130" width="220" height="236" rx="16" fill="#10231f" stroke="#73ddcf"/><text x="66" y="164" fill="#73ddcf" font-size="12">输入证据</text><text x="66" y="195" fill="#f3f0dc" font-size="19" font-weight="700">Evidence Bundle</text><rect x="66" y="216" width="171" height="31" rx="5" fill="#17352e"/><text x="78" y="237" fill="#cde3d9" font-size="12">候选与静态证据</text><rect x="66" y="257" width="171" height="31" rx="5" fill="#17352e"/><text x="78" y="278" fill="#cde3d9" font-size="12">Top-k 仓库上下文</text><rect x="66" y="298" width="171" height="31" rx="5" fill="#17352e"/><text x="78" y="319" fill="#cde3d9" font-size="12">历史动作与运行时观察</text><text x="66" y="350" fill="#a7c0b8" font-size="11">Finding · RepoRiskContext · Trace</text></g>
+    <g><rect x="310" y="130" width="220" height="236" rx="16" fill="#112b25" stroke="#73ddcf"/><text x="334" y="164" fill="#73ddcf" font-size="12">特征编码</text><text x="334" y="195" fill="#f3f0dc" font-size="19" font-weight="700">State Encoder</text><text x="334" y="225" fill="#a7c0b8" font-size="13">编码控制流、对象关系、约束、</text><text x="334" y="246" fill="#a7c0b8" font-size="13">防御分支与跨文件依赖为向量。</text><rect x="334" y="278" width="172" height="42" rx="7" fill="#193b33" stroke="#47756b"/><text x="346" y="304" fill="#d8ef72" font-size="12">z = Encoder(evidence)</text><text x="334" y="347" fill="#a7c0b8" font-size="11">结构化状态表征 z</text></g>
+    <g><rect x="578" y="106" width="260" height="284" rx="20" fill="#183b32" stroke="url(#core)" stroke-width="3"/><text x="604" y="144" fill="#d8ef72" font-size="12">状态推演核心</text><text x="604" y="179" fill="#f3f0dc" font-size="21" font-weight="700">State Transition Model</text><text x="604" y="211" fill="#b9d5cb" font-size="13">预测动作后漏洞状态将如何变化：</text><text x="604" y="234" fill="#b9d5cb" font-size="13">可达性、前置条件、触发概率</text><rect x="604" y="257" width="208" height="58" rx="8" fill="#123229" stroke="#5c9f90"/><text x="620" y="282" fill="#d8ef72" font-size="12">P(s[t+1] | s[t], action)</text><text x="620" y="303" fill="#cde3d9" font-size="11">状态后验与不确定性估计</text><text x="604" y="352" fill="#a7c0b8" font-size="11">Candidate → Triggerable → Confirmed / Rejected</text></g>
+    <g><rect x="886" y="130" width="252" height="236" rx="16" fill="#14251f" stroke="#f2b66e"/><text x="910" y="164" fill="#f2b66e" font-size="12">预算式决策</text><text x="910" y="195" fill="#f3f0dc" font-size="19" font-weight="700">Action Planner</text><text x="910" y="225" fill="#a7c0b8" font-size="13">为每个动作估计信息增益、成本</text><text x="910" y="246" fill="#a7c0b8" font-size="13">与预期确认收益，再执行排序。</text><rect x="910" y="275" width="204" height="44" rx="7" fill="#3b3020" stroke="#89643b"/><text x="922" y="302" fill="#f2b66e" font-size="12">score(a) = gain - cost - risk</text><text x="910" y="347" fill="#a7c0b8" font-size="11">在预算 B 内选择 action*</text></g>
+  </g>
+  <g fill="none" stroke="#73ddcf" stroke-width="3" stroke-dasharray="8 8" marker-end="url(#arrow)"><path d="M262 248h48"/><path d="M530 248h48"/><path d="M838 248h48"/></g>
+  <g font-family="Microsoft YaHei, Noto Sans SC, sans-serif">
+    <rect x="165" y="454" width="850" height="88" rx="16" fill="#102923" stroke="#416c60"/>
+    <text x="194" y="486" fill="#73ddcf" font-size="12">下一步验证动作</text><text x="194" y="516" fill="#f3f0dc" font-size="17" font-weight="700">Action Executor</text>
+    <g><rect x="405" y="475" width="116" height="40" rx="7" fill="#223a32"/><text x="433" y="501" fill="#d8ef72" font-size="13">局部编译</text><rect x="535" y="475" width="116" height="40" rx="7" fill="#223a32"/><text x="568" y="501" fill="#d8ef72" font-size="13">ASan/UBSan</text><rect x="665" y="475" width="116" height="40" rx="7" fill="#223a32"/><text x="703" y="501" fill="#d8ef72" font-size="13">定向 fuzz</text><rect x="795" y="475" width="116" height="40" rx="7" fill="#223a32"/><text x="831" y="501" fill="#d8ef72" font-size="13">LLM 复核</text></g>
+    <text x="194" y="533" fill="#a7c0b8" font-size="11">动作观察结果作为新证据回流，重新编码并更新状态信念。</text>
+  </g>
+  <path d="M1012 366v88H588" fill="none" stroke="#f2b66e" stroke-width="3" stroke-dasharray="7 7" marker-end="url(#arrow)"/>
+  <path d="M300 542v40H152V366" fill="none" stroke="#d8ef72" stroke-width="2" stroke-dasharray="5 8" marker-end="url(#arrow)"/>
+  <g font-family="Microsoft YaHei, Noto Sans SC, sans-serif"><text x="45" y="584" fill="#d8ef72" font-size="11">证据回写：诊断、崩溃、未命中原因和消耗时间会影响下一轮状态预测与动作优先级。</text></g>
+</svg>
